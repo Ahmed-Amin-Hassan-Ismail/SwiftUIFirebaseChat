@@ -15,6 +15,8 @@ class LoginViewModel: ObservableObject {
     @Published var isLoginMode: Bool = false
     @Published var email: String = ""
     @Published var password: String = ""
+    @Published var isErrorOccured: Bool = false
+    @Published var errorMessage: String = ""
     
     
     //MARK: - Methods
@@ -22,11 +24,39 @@ class LoginViewModel: ObservableObject {
     func handleAction() {
         if isLoginMode { // click on login button
             
-            print("User Login Successfully")
+            userLogin()
             
         } else { // click on create button
             
-            print("User create new account Successfully")
+            createNewUser()
+        }
+    }
+    
+    //MARK: - Private Methods
+    
+    private func createNewUser() {
+        
+        FirebaseManager.shared.createNewUser(with: email, password: password) { [weak self] result, error in
+            guard error == nil else {
+                self?.isErrorOccured = true
+                self?.errorMessage = error?.localizedDescription ?? ""
+                return
+            }
+            
+            print("Successfully Create new account \(result!.user.uid)")
+        }
+    }
+    
+    private func userLogin() {
+        
+        FirebaseManager.shared.loginUser(with: email, password: password) { [weak self] result, error in
+            guard error == nil else {
+                self?.isErrorOccured = true
+                self?.errorMessage = error?.localizedDescription ?? ""
+                return
+            }
+            
+            print("Successfully login with user: \(result!.user.uid)")
         }
     }
 }

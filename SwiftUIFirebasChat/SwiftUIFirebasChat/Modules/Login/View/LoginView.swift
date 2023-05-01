@@ -29,9 +29,12 @@ struct LoginView: View {
                     
                     credentialFieldView
                     
-                    accountButtonView
+                    accountButtonView 
                 }
                 .padding()
+                .alert(viewModel.errorMessage, isPresented: $viewModel.isErrorOccured, actions: {
+                  // no implemented yet
+                })
             }
             .navigationTitle(viewModel.isLoginMode ? "Log in" : "Create Account")
             .navigationViewStyle(.stack)
