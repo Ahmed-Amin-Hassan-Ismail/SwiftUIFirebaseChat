@@ -34,6 +34,7 @@ struct LoginView: View {
                 .padding()
             }
             .navigationTitle(viewModel.isLoginMode ? "Log in" : "Create Account")
+            .navigationViewStyle(.stack)
             .background(
                 Color.init(UIColor(white: 0, alpha: 0.05))
                     .edgesIgnoringSafeArea(.all)
