@@ -10,6 +10,7 @@ import Firebase
 import FirebaseCore
 import FirebaseAuth
 import FirebaseStorage
+import FirebaseFirestore
 
 class FirebaseManager {
     
@@ -18,6 +19,8 @@ class FirebaseManager {
     static let shared: FirebaseManager = {
         return FirebaseManager()
     }()
+    
+    private let collectionName: String = "Users"
     
     private init() { }
     
@@ -43,6 +46,7 @@ class FirebaseManager {
     }
     
     func pushImageIntoStorage(imageData: Data, completion: @escaping (URL?, Error?) -> Void) {
+        
         let ref = Storage.storage().reference(withPath: getCurrentUserUid())
         ref.putData(imageData) { (_, error) in
             completion(nil, error)
@@ -52,9 +56,16 @@ class FirebaseManager {
         }
     }
     
+    func storeUserInformation(with userData: [String: Any], completion: @escaping (Error?) -> Void) {
+        
+        Firestore.firestore().collection(collectionName).document(getCurrentUserUid()).setData(userData) { error in
+            completion(error)
+        }
+    }
+    
     //MARK: - Getters
     
-    private func getCurrentUserUid() -> String {
+    func getCurrentUserUid() -> String {
         
         return Auth.auth().currentUser?.uid ?? ""
     }

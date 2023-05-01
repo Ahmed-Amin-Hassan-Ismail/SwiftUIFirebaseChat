@@ -65,8 +65,30 @@ class LoginViewModel: ObservableObject {
             }
             
             print("Successfully store image with url \(url?.absoluteString ?? "")")
+            
+            self.storeUserInformation(with: url)
         }
         
+    }
+    
+    private func storeUserInformation(with imageUrl: URL?) {
+        guard let url = imageUrl else { return }
+        let userData = [
+            "email": email,
+            "uid": FirebaseManager.shared.getCurrentUserUid(),
+            "profileImageUrl": url.absoluteString
+        ]
+        
+        FirebaseManager.shared.storeUserInformation(with: userData) { [weak self] error in
+            guard let self = self else { return }
+            guard error == nil else {
+                self.isErrorOccured = true
+                self.errorMessage = error?.localizedDescription ?? ""
+                return
+            }
+            
+            print("Success create collection data")
+        }
     }
     
     private func userLogin() {
