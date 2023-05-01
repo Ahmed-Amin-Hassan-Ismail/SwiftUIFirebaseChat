@@ -33,8 +33,12 @@ class LoginViewModel: ObservableObject {
             createNewUser()
         }
     }
-    
-    //MARK: - Private Methods
+}
+
+
+//MARK: - Create New Account
+
+extension LoginViewModel {
     
     private func createNewUser() {
         
@@ -90,6 +94,12 @@ class LoginViewModel: ObservableObject {
             print("Success create collection data")
         }
     }
+}
+
+
+//MARK: - Login Account
+
+extension LoginViewModel {
     
     private func userLogin() {
         
