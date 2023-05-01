@@ -16,6 +16,7 @@
 		AC2484382A0033B40073D169 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = AC2484372A0033B40073D169 /* FirebaseStorage */; };
 		AC24843A2A0035290073D169 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC2484392A0035290073D169 /* GoogleService-Info.plist */; };
 		AC24843E2A0035510073D169 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC24843D2A0035510073D169 /* FirebaseManager.swift */; };
+		AC2484442A0044830073D169 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2484432A0044830073D169 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		AC24842F2A00294C0073D169 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		AC2484392A0035290073D169 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AC24843D2A0035510073D169 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		AC2484432A0044830073D169 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 			children = (
 				AC24841A2A001CB90073D169 /* SwiftUIFirebasChatApp.swift */,
 				AC24843B2A0035420073D169 /* Core */,
+				AC2484422A0044780073D169 /* Component */,
 				AC2484292A001D930073D169 /* Modules */,
 				AC24841E2A001CBA0073D169 /* Assets.xcassets */,
 				AC2484392A0035290073D169 /* GoogleService-Info.plist */,
@@ -126,6 +129,14 @@
 				AC24843D2A0035510073D169 /* FirebaseManager.swift */,
 			);
 			path = Firebase;
+			sourceTree = "<group>";
+		};
+		AC2484422A0044780073D169 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				AC2484432A0044830073D169 /* ImagePicker.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +219,7 @@
 			files = (
 				AC24842E2A001DB40073D169 /* LoginView.swift in Sources */,
 				AC24841B2A001CB90073D169 /* SwiftUIFirebasChatApp.swift in Sources */,
+				AC2484442A0044830073D169 /* ImagePicker.swift in Sources */,
 				AC24843E2A0035510073D169 /* FirebaseManager.swift in Sources */,
 				AC2484302A00294C0073D169 /* LoginViewModel.swift in Sources */,
 			);

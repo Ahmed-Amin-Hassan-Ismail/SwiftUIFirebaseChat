@@ -29,12 +29,15 @@ struct LoginView: View {
                     
                     credentialFieldView
                     
-                    accountButtonView 
+                    accountButtonView
                 }
                 .padding()
                 .alert(viewModel.errorMessage, isPresented: $viewModel.isErrorOccured, actions: {
-                  // no implemented yet
+                    // not implemented yet
                 })
+                .fullScreenCover(isPresented: $viewModel.shouldShowImagePicker) {
+                    ImagePicker(image: $viewModel.profileImage)
+                }
             }
             .navigationTitle(viewModel.isLoginMode ? "Log in" : "Create Account")
             .navigationViewStyle(.stack)
@@ -50,8 +53,7 @@ struct LoginView: View {
 
 extension LoginView {
     
-    // picker view
-   private var segmentedView: some View {
+    private var segmentedView: some View {
         Picker("Picker Mode", selection: $viewModel.isLoginMode) {
             Text("Login")
                 .tag(true)
@@ -64,19 +66,29 @@ extension LoginView {
     
     private var profileImageButtonView: some View {
         Button {
-            
+            viewModel.shouldShowImagePicker = true
         } label: {
             Circle()
                 .stroke(lineWidth: 2)
                 .frame(width: 130, height: 130)
                 .overlay(
-                    Image(systemName: "person.fill")
-                        .font(.system(size: 65))
+                    ZStack {
+                        if let image = viewModel.profileImage {
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 130, height: 130)
+                                .cornerRadius(65)
+                        } else {
+                            Image(systemName: "person.fill")
+                                .font(.system(size: 65))
+                        }
+                    }
                 )
         }
         .padding(.bottom)
-        .foregroundColor(.black)
-        .shadow(radius: 10)
+        .foregroundColor(Color(.label))
+        .shadow(radius: 30)
     }
     
     private var credentialFieldView: some View {

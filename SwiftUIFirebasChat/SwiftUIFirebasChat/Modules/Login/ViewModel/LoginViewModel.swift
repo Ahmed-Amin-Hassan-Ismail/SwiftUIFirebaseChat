@@ -5,7 +5,7 @@
 //  Created by Ahmed Amin on 01/05/2023.
 //
 
-import Foundation
+import SwiftUI
 
 
 class LoginViewModel: ObservableObject {
@@ -15,6 +15,8 @@ class LoginViewModel: ObservableObject {
     @Published var isLoginMode: Bool = false
     @Published var email: String = ""
     @Published var password: String = ""
+    @Published var shouldShowImagePicker: Bool = false
+    @Published var profileImage: UIImage?
     @Published var isErrorOccured: Bool = false
     @Published var errorMessage: String = ""
     
@@ -37,22 +39,43 @@ class LoginViewModel: ObservableObject {
     private func createNewUser() {
         
         FirebaseManager.shared.createNewUser(with: email, password: password) { [weak self] result, error in
+            guard let self = self else { return }
             guard error == nil else {
-                self?.isErrorOccured = true
-                self?.errorMessage = error?.localizedDescription ?? ""
+                self.isErrorOccured = true
+                self.errorMessage = error?.localizedDescription ?? ""
                 return
             }
             
             print("Successfully Create new account \(result!.user.uid)")
+            
+            self.persistImageToStorage()
         }
+    }
+    
+    private func persistImageToStorage() {
+        
+        guard let image = profileImage else { return }
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
+        FirebaseManager.shared.pushImageIntoStorage(imageData: imageData) { [weak self] url, error in
+            guard let self = self else { return }
+            guard error == nil else {
+                self.isErrorOccured = true
+                self.errorMessage = error?.localizedDescription ?? ""
+                return
+            }
+            
+            print("Successfully store image with url \(url?.absoluteString ?? "")")
+        }
+        
     }
     
     private func userLogin() {
         
         FirebaseManager.shared.loginUser(with: email, password: password) { [weak self] result, error in
+            guard let self = self else { return }
             guard error == nil else {
-                self?.isErrorOccured = true
-                self?.errorMessage = error?.localizedDescription ?? ""
+                self.isErrorOccured = true
+                self.errorMessage = error?.localizedDescription ?? ""
                 return
             }
             
