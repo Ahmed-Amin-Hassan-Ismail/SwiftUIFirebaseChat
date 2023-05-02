@@ -63,6 +63,14 @@ class FirebaseManager {
         }
     }
     
+    
+    func fetchCurrentUser(completion: @escaping (DocumentSnapshot?, Error?) -> Void) {
+        
+        Firestore.firestore().collection(collectionName).document(getCurrentUserUid()).getDocument { snapshot, error in
+            completion(snapshot, error)
+        }
+    }
+    
     //MARK: - Getters
     
     func getCurrentUserUid() -> String {

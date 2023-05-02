@@ -21,7 +21,8 @@ struct MainMessageView: View {
             
             VStack {
                 
-                UserStatusView(showShowLogoutOptions: $viewModel.shouldShowLogoutOption)
+                UserStatusView(user: viewModel.user,
+                               shouldShowLogoutAlert: $viewModel.shouldShowLogoutAlert)
                 
                 ScrollView(showsIndicators: false) {
                     ForEach(0..<10, id: \.self) { _ in
@@ -30,7 +31,10 @@ struct MainMessageView: View {
                 }
                 .padding(.bottom, 50)
             }
-            .actionSheet(isPresented: $viewModel.shouldShowLogoutOption,
+            .alert(viewModel.errorMessage, isPresented: $viewModel.isGetAnError, actions: {
+                // not implemented yet
+            })
+            .actionSheet(isPresented: $viewModel.shouldShowLogoutAlert,
                          content: handleActionSheet)
             .overlay(newMessageButton, alignment: .bottom)
             .navigationBarHidden(true)

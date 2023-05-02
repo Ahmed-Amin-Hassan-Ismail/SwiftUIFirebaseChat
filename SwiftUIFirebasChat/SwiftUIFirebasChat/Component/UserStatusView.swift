@@ -11,7 +11,12 @@ struct UserStatusView: View {
     
     //MARK: - Body
     
-    @Binding var showShowLogoutOptions: Bool
+    let user: User?
+    
+    @Binding var shouldShowLogoutAlert: Bool
+    
+    
+    //MARK: - Body
     
     var body: some View {
         HStack(spacing: 16) {
@@ -19,14 +24,23 @@ struct UserStatusView: View {
                 .stroke(lineWidth: 1)
                 .frame(width: 48, height: 48)
                 .overlay(
-                    Image(systemName: "person.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 24, height: 24)
+                    AsyncImage(url: user?.imageUrl) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 48, height: 48)
+                            .cornerRadius(24)
+                        
+                    } placeholder: {
+                        Image(systemName: "person.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 24, height: 24)
+                    }
                 )
             
             VStack(alignment: .leading, spacing: 4) {
-                Text("username".capitalized)
+                Text(user?.fullName ?? "")
                     .font(.system(size: 24, weight: .bold))
                 
                 HStack {
@@ -43,7 +57,7 @@ struct UserStatusView: View {
             Spacer()
             
             Button {
-                showShowLogoutOptions.toggle()
+                shouldShowLogoutAlert.toggle()
             } label: {
                 Image(systemName: "gear")
                     .font(.system(size: 24, weight: .heavy))
@@ -60,12 +74,12 @@ struct UserStatusView: View {
 
 extension UserStatusView {
     private func handleLogoutAction() {
-        
+        //TODO: - not implemented yet
     }
 }
 
 struct UserStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        UserStatusView(showShowLogoutOptions: .constant(false))
+        UserStatusView(user: dev.user, shouldShowLogoutAlert: .constant(false))
     }
 }

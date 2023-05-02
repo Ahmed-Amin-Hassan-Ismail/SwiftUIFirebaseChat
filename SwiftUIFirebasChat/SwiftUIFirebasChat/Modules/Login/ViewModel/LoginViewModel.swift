@@ -5,7 +5,7 @@
 //  Created by Ahmed Amin on 01/05/2023.
 //
 
-import SwiftUI
+import Foundation
 
 
 class LoginViewModel: ObservableObject {
@@ -13,24 +13,21 @@ class LoginViewModel: ObservableObject {
     //MARK: - Properties
     
     @Published var isLoginMode: Bool = false
-    @Published var email: String = ""
-    @Published var password: String = ""
     @Published var shouldShowImagePicker: Bool = false
-    @Published var profileImage: UIImage?
     @Published var isErrorOccured: Bool = false
     @Published var errorMessage: String = ""
     
     
     //MARK: - Methods
     
-    func handleAction() {
+    func handleAction(with user: User) {
         if isLoginMode { // click on login button
             
-            userLogin()
+            login(with: user)
             
         } else { // click on create button
             
-            createNewUser()
+            createNewUser(with: user)
         }
     }
 }
@@ -40,9 +37,10 @@ class LoginViewModel: ObservableObject {
 
 extension LoginViewModel {
     
-    private func createNewUser() {
+    private func createNewUser(with user: User) {
         
-        FirebaseManager.shared.createNewUser(with: email, password: password) { [weak self] result, error in
+        FirebaseManager.shared.createNewUser(with: user.email.stringValue,
+                                             password: user.password.stringValue) { [weak self] result, error in
             guard let self = self else { return }
             guard error == nil else {
                 self.isErrorOccured = true
@@ -52,14 +50,13 @@ extension LoginViewModel {
             
             print("Successfully Create new account \(result!.user.uid)")
             
-            self.persistImageToStorage()
+            self.persistImageToStorage(with: user)
         }
     }
     
-    private func persistImageToStorage() {
+    private func persistImageToStorage(with user: User) {
         
-        guard let image = profileImage else { return }
-        guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
+        guard let imageData = user.profileImageData else { return }
         FirebaseManager.shared.pushImageIntoStorage(imageData: imageData) { [weak self] url, error in
             guard let self = self else { return }
             guard error == nil else {
@@ -70,15 +67,17 @@ extension LoginViewModel {
             
             print("Successfully store image with url \(url?.absoluteString ?? "")")
             
-            self.storeUserInformation(with: url)
+            self.storeInformation(of: user, with: url)
         }
         
     }
     
-    private func storeUserInformation(with imageUrl: URL?) {
+    private func storeInformation(of user: User, with imageUrl: URL?) {
         guard let url = imageUrl else { return }
         let userData = [
-            "email": email,
+            "firstName": user.firstName.stringValue,
+            "lastName": user.lastName.stringValue,
+            "email": user.email.stringValue,
             "uid": FirebaseManager.shared.getCurrentUserUid(),
             "profileImageUrl": url.absoluteString
         ]
@@ -101,9 +100,10 @@ extension LoginViewModel {
 
 extension LoginViewModel {
     
-    private func userLogin() {
+    private func login(with user: User) {
         
-        FirebaseManager.shared.loginUser(with: email, password: password) { [weak self] result, error in
+        FirebaseManager.shared.loginUser(with: user.email.stringValue,
+                                         password: user.password.stringValue) { [weak self] result, error in
             guard let self = self else { return }
             guard error == nil else {
                 self.isErrorOccured = true

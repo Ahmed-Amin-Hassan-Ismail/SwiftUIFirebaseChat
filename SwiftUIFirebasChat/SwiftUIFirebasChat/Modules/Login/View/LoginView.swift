@@ -12,6 +12,12 @@ struct LoginView: View {
     //MARK: - Properties
     
     @StateObject private var viewModel = LoginViewModel()
+    @State private var profileImage: UIImage?
+    @State private var firstName: String = ""
+    @State private var lastName: String = ""
+    @State private var email: String = ""
+    @State private var password: String = ""
+    
     
     //MARK: - Body
     
@@ -36,7 +42,7 @@ struct LoginView: View {
                     // not implemented yet
                 })
                 .fullScreenCover(isPresented: $viewModel.shouldShowImagePicker) {
-                    ImagePicker(image: $viewModel.profileImage)
+                    ImagePicker(image: $profileImage)
                 }
             }
             .navigationTitle(viewModel.isLoginMode ? "Log in" : "Create Account")
@@ -73,7 +79,7 @@ extension LoginView {
                 .frame(width: 130, height: 130)
                 .overlay(
                     ZStack {
-                        if let image = viewModel.profileImage {
+                        if let image = profileImage {
                             Image(uiImage: image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
@@ -93,11 +99,17 @@ extension LoginView {
     
     private var credentialFieldView: some View {
         Group {
-            TextField("Email", text: $viewModel.email)
+            if !viewModel.isLoginMode {
+                TextField("First Name", text: $firstName)
+                
+                TextField("Last Name", text: $lastName)
+            }
+            
+            TextField("Email", text: $email)
                 .keyboardType(.emailAddress)
                 .textInputAutocapitalization(.never)
             
-            SecureField("Password", text: $viewModel.password)
+            SecureField("Password", text: $password)
         }
         .padding([.vertical, .horizontal], 10)
         .background(Color.white)
@@ -106,7 +118,13 @@ extension LoginView {
     
     private var accountButtonView: some View {
         Button {
-            viewModel.handleAction()
+            lazy var imageData = profileImage?.jpegData(compressionQuality: 0.5)
+            lazy var user = User(firstName: firstName,
+                                 lastName: lastName,
+                                 email: email,
+                                 password: password,
+                                 profileImageData: imageData)
+            viewModel.handleAction(with: user)
             
         } label: {
             Text(viewModel.isLoginMode ? "Log in" : "Create Account")
