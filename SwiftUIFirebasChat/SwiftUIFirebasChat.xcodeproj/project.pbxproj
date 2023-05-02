@@ -18,6 +18,10 @@
 		AC2484472A0054220073D169 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AC2484462A0054220073D169 /* FirebaseAuth */; };
 		AC2484492A0054220073D169 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AC2484482A0054220073D169 /* FirebaseFirestore */; };
 		AC24844B2A0054220073D169 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = AC24844A2A0054220073D169 /* FirebaseStorage */; };
+		AC2484522A013EB30073D169 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2484512A013EB30073D169 /* MessageView.swift */; };
+		AC2484562A013ED00073D169 /* MainMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2484552A013ED00073D169 /* MainMessageView.swift */; };
+		AC2484582A0143420073D169 /* UserStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2484572A0143420073D169 /* UserStatusView.swift */; };
+		AC24845A2A016AC80073D169 /* MainMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2484592A016AC80073D169 /* MainMessageViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		AC2484392A0035290073D169 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AC24843D2A0035510073D169 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		AC2484432A0044830073D169 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		AC2484512A013EB30073D169 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		AC2484552A013ED00073D169 /* MainMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessageView.swift; sourceTree = "<group>"; };
+		AC2484572A0143420073D169 /* UserStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatusView.swift; sourceTree = "<group>"; };
+		AC2484592A016AC80073D169 /* MainMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessageViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +95,7 @@
 		AC2484292A001D930073D169 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				AC24844C2A013E660073D169 /* MainMessage */,
 				AC24842A2A001D9C0073D169 /* Login */,
 			);
 			path = Modules;
@@ -137,8 +146,35 @@
 			isa = PBXGroup;
 			children = (
 				AC2484432A0044830073D169 /* ImagePicker.swift */,
+				AC2484572A0143420073D169 /* UserStatusView.swift */,
+				AC2484512A013EB30073D169 /* MessageView.swift */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		AC24844C2A013E660073D169 /* MainMessage */ = {
+			isa = PBXGroup;
+			children = (
+				AC24844E2A013E740073D169 /* ViewModel */,
+				AC24844D2A013E6E0073D169 /* View */,
+			);
+			path = MainMessage;
+			sourceTree = "<group>";
+		};
+		AC24844D2A013E6E0073D169 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AC2484552A013ED00073D169 /* MainMessageView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AC24844E2A013E740073D169 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AC2484592A016AC80073D169 /* MainMessageViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,10 +256,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC24845A2A016AC80073D169 /* MainMessageViewModel.swift in Sources */,
 				AC24842E2A001DB40073D169 /* LoginView.swift in Sources */,
 				AC24841B2A001CB90073D169 /* SwiftUIFirebasChatApp.swift in Sources */,
+				AC2484562A013ED00073D169 /* MainMessageView.swift in Sources */,
 				AC2484442A0044830073D169 /* ImagePicker.swift in Sources */,
 				AC24843E2A0035510073D169 /* FirebaseManager.swift in Sources */,
+				AC2484582A0143420073D169 /* UserStatusView.swift in Sources */,
+				AC2484522A013EB30073D169 /* MessageView.swift in Sources */,
 				AC2484302A00294C0073D169 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
