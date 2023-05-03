@@ -15,19 +15,23 @@ class MainMessageViewModel: ObservableObject {
     @Published var shouldShowLogoutAlert: Bool = false
     @Published var errorMessage: String = ""
     @Published var isGetAnError: Bool = false
+    @Published var isUserLoggedOut: Bool = false
     @Published var user: User?
     
     //MARK: - Init
     
     init() {
+        
+        guard !ifUserLoggedOut() else { return }
         fetchCurrentUser()
     }
     
     //MARK: - Methods
     
-    func logout() {
+    func signOut() {
         
-        //TODO: - not implemented yet
+        isUserLoggedOut = true
+        FirebaseManager.shared.handleSignOut()
     }
     
     //MARK: - Private Methods
@@ -43,20 +47,15 @@ class MainMessageViewModel: ObservableObject {
             }
             
             guard let data = snapshot?.data() else { return }
-            
-            let uid = data["uid"] as? String
-            let firstName = data["firstName"] as? String
-            let lastName = data["lastName"] as? String
-            let email = data["email"] as? String
-            let profileImageUrl = data["profileImageUrl"] as? String
-            
-            self.user = User(
-                uid: uid,
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                profileImageUrl: profileImageUrl
-            )
+                                    
+            self.user = User(data: data)
         }
+    }
+    
+    private func ifUserLoggedOut() -> Bool {
+        
+        isUserLoggedOut = FirebaseManager.shared.getCurrentUserUid().isEmpty
+        
+        return isUserLoggedOut
     }
 }

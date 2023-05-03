@@ -25,3 +25,17 @@ struct User: Codable {
         return URL(string: profileImageUrl ?? "")
     }
 }
+
+/// to not lose memberwise initializer
+extension User {
+    
+    init(data: [String : Any]) {
+        
+        self.uid = data["uid"] as? String
+        self.firstName = data["firstName"] as? String
+        self.lastName = data["lastName"] as? String
+        self.email = data["email"] as? String
+        self.profileImageUrl = data["profileImageUrl"] as? String
+    }
+    
+}

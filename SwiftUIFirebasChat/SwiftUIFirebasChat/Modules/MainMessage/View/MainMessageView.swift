@@ -36,6 +36,9 @@ struct MainMessageView: View {
             })
             .actionSheet(isPresented: $viewModel.shouldShowLogoutAlert,
                          content: handleActionSheet)
+            .fullScreenCover(isPresented: $viewModel.isUserLoggedOut, content: {
+                LoginView()
+            })
             .overlay(newMessageButton, alignment: .bottom)
             .navigationBarHidden(true)
         }
@@ -75,7 +78,7 @@ extension MainMessageView {
             message: Text("What do you want to do?"),
             buttons: [
             .destructive(Text("Sign out")) {
-                viewModel.logout()
+                viewModel.signOut()
             },
             .cancel()
         ])

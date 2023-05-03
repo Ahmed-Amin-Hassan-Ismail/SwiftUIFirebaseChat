@@ -16,6 +16,7 @@ class LoginViewModel: ObservableObject {
     @Published var shouldShowImagePicker: Bool = false
     @Published var isErrorOccured: Bool = false
     @Published var errorMessage: String = ""
+    @Published var isUserLoginSuccessfully: Bool = false
     
     
     //MARK: - Methods
@@ -39,6 +40,11 @@ extension LoginViewModel {
     
     private func createNewUser(with user: User) {
         
+        guard checkValidateDataForNewUser(with: user) else {
+            showErrorForMissingFields()
+            return
+        }
+        
         FirebaseManager.shared.createNewUser(with: user.email.stringValue,
                                              password: user.password.stringValue) { [weak self] result, error in
             guard let self = self else { return }
@@ -47,8 +53,6 @@ extension LoginViewModel {
                 self.errorMessage = error?.localizedDescription ?? ""
                 return
             }
-            
-            print("Successfully Create new account \(result!.user.uid)")
             
             self.persistImageToStorage(with: user)
         }
@@ -64,8 +68,6 @@ extension LoginViewModel {
                 self.errorMessage = error?.localizedDescription ?? ""
                 return
             }
-            
-            print("Successfully store image with url \(url?.absoluteString ?? "")")
             
             self.storeInformation(of: user, with: url)
         }
@@ -90,7 +92,7 @@ extension LoginViewModel {
                 return
             }
             
-            print("Success create collection data")
+            self.isUserLoginSuccessfully = true
         }
     }
 }
@@ -102,6 +104,11 @@ extension LoginViewModel {
     
     private func login(with user: User) {
         
+        guard checkLoginData(with: user) else {
+            showErrorForMissingFields()
+            return
+        }
+        
         FirebaseManager.shared.loginUser(with: user.email.stringValue,
                                          password: user.password.stringValue) { [weak self] result, error in
             guard let self = self else { return }
@@ -111,7 +118,32 @@ extension LoginViewModel {
                 return
             }
             
-            print("Successfully login with user: \(result!.user.uid)")
+            self.isUserLoginSuccessfully = true
         }
+    }
+}
+
+//MARK: - Helper Methods
+
+extension LoginViewModel {
+    
+    private func checkValidateDataForNewUser(with user: User) -> Bool {
+        
+        return !(user.profileImageData?.isEmpty ?? true) &&
+        !(user.firstName?.isEmpty ?? true) &&
+        !(user.lastName?.isEmpty ?? true) &&
+        !(user.email?.isEmpty ?? true) &&
+        !(user.password?.isEmpty ?? true)
+    }
+    
+    private func checkLoginData(with user: User) -> Bool {
+        
+        return !(user.email?.isEmpty ?? true) &&
+        !(user.password?.isEmpty ?? true)
+    }
+    
+    private func showErrorForMissingFields() {
+        isErrorOccured = true
+        errorMessage = "Please add missing fields 🥹"
     }
 }

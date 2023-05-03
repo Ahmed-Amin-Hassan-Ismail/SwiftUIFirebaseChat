@@ -71,6 +71,17 @@ class FirebaseManager {
         }
     }
     
+    func handleSignOut() {
+        do {
+            
+            try Auth.auth().signOut()
+            
+        } catch {
+            
+            print("Error: \(error)")
+        }
+    }
+    
     //MARK: - Getters
     
     func getCurrentUserUid() -> String {

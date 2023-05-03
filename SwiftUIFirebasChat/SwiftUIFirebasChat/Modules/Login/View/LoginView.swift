@@ -48,8 +48,17 @@ struct LoginView: View {
             .navigationTitle(viewModel.isLoginMode ? "Log in" : "Create Account")
             .navigationViewStyle(.stack)
             .background(
-                Color.init(UIColor(white: 0, alpha: 0.05))
-                    .edgesIgnoringSafeArea(.all)
+                ZStack {
+                    Color.init(UIColor(white: 0, alpha: 0.05))
+                        .edgesIgnoringSafeArea(.all)
+
+                    NavigationLink(
+                        destination: MainMessageView()
+                            .navigationBarHidden(true),
+                        isActive: $viewModel.isUserLoginSuccessfully,
+                        label: { EmptyView() }
+                    )
+                }
             )
         }
     }
@@ -118,7 +127,7 @@ extension LoginView {
     
     private var accountButtonView: some View {
         Button {
-            lazy var imageData = profileImage?.jpegData(compressionQuality: 0.5)
+            let imageData = profileImage?.jpegData(compressionQuality: 0.5)
             lazy var user = User(firstName: firstName,
                                  lastName: lastName,
                                  email: email,
