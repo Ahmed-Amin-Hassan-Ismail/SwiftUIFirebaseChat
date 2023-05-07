@@ -34,7 +34,7 @@ struct ChatLogView: View {
             .alert(viewModel.errorMessage,
                    isPresented: $viewModel.isErrorOccurred,
                    actions: { })
-            .navigationTitle("Hello Guys")
+            .navigationTitle(viewModel.user?.email ?? "")
             .navigationBarTitleDisplayMode(.inline)
        
     }
@@ -49,9 +49,9 @@ extension ChatLogView {
         
         ScrollView(showsIndicators: false) {
             
-            ForEach(0..<10, id: \.self) { _ in
+            ForEach(viewModel.chatMessages) { message in
                 
-                ChatMessageView()
+                ChatMessageView(chatMessage: message)
             }
         }
         .background(Color(.init(white: 0.95, alpha: 1.0)))

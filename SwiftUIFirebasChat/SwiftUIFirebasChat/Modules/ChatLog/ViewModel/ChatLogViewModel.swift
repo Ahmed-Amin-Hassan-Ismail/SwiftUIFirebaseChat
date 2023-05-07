@@ -13,6 +13,7 @@ class ChatLogViewModel: ObservableObject {
     
     //MARK: - Properties
     
+    @Published var chatMessages = [ChatMessage]()
     @Published var chatTextMessage: String = ""
     @Published var errorMessage: String = ""
     @Published var isErrorOccurred: Bool = false
@@ -24,6 +25,8 @@ class ChatLogViewModel: ObservableObject {
     init(user: User?) {
         
         self.user = user
+        
+        fetchAllMessages()
     }
     
     //MARK: - Methods
@@ -42,4 +45,29 @@ class ChatLogViewModel: ObservableObject {
             self.chatTextMessage = ""
         }
     }
+    
+    //MARK: - Private Methods
+    
+    private func fetchAllMessages() {
+        
+        guard let toId = user?.uid else { return }
+        
+        FirebaseManager.shared.fetchAllMessages(toId: toId) { [weak self] querySnapshot, error in
+            guard let self = self else { return }
+            guard error == nil else {
+                self.errorMessage = error?.localizedDescription ?? ""
+                self.isErrorOccurred = true
+                return
+            }
+            
+            querySnapshot?.documentChanges.forEach({ documentChange in
+                if documentChange.type == .added {
+                    let documentId = documentChange.document.documentID
+                    let data = documentChange.document.data()
+                    self.chatMessages.append(.init(documentId: documentId, data: data))
+                }
+            })
+        }
+    }
+    
 }

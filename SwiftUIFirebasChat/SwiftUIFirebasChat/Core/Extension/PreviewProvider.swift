@@ -34,4 +34,11 @@ class DeveloperPreview {
         profileImageUrl: "https://firebasestorage.googleapis.com:443/v0/b/swftuifirebasechat.appspot.com/o/MveSb24UGpQspff0ZTQtMnE61AT2?alt=media&token=9f83f1c5-0a4d-410f-85ac-cb96bf6bc412"
     )
     
+    let chatMessage = ChatMessage(
+        fromId: "123123",
+        toId: "456456",
+        text: "Message for testing",
+        timestamp: "",
+        documentId: "asdfasdf")
+    
 }

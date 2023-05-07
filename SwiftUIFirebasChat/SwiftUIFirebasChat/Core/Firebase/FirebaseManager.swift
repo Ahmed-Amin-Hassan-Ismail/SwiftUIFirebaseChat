@@ -98,6 +98,13 @@ class FirebaseManager {
         
     }
     
+    func fetchAllMessages(toId: String, completiobn: @escaping (QuerySnapshot?, Error?) -> Void) {
+        
+        Firestore.firestore().collection(messageCollectionName).document(getCurrentUserUid()).collection(toId).order(by: "timestamp").addSnapshotListener { querySnapshot, error in
+            completiobn(querySnapshot, error)
+        }
+    }
+    
     func handleSignOut() {
         do {
             

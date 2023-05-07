@@ -13,7 +13,7 @@ class CreateNewMessageViewModel: ObservableObject {
     
     //MARK: - Properties
     
-    @Published var users: [User]?
+    @Published var users = [User]()
     @Published var errorMessage: String = ""
     @Published var isErrorOccurred: Bool = false
     
@@ -40,11 +40,7 @@ class CreateNewMessageViewModel: ObservableObject {
                 let data = snapshot.data()
                 let user = User(data: data)
                 if user.uid != FirebaseManager.shared.getCurrentUserUid() {
-                    if self.users != nil {
-                        self.users?.append(.init(data: data))
-                    } else {
-                        self.users = [User(data: data)]
-                    }
+                    self.users.append(.init(data: data))
                 }
                 
             })

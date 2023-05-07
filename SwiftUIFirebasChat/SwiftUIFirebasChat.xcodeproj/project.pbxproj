@@ -31,6 +31,7 @@
 		AC8850FE2A07F49B002C2621 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8850FD2A07F49B002C2621 /* ChatLogView.swift */; };
 		AC8851002A07F906002C2621 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8850FF2A07F906002C2621 /* ChatMessageView.swift */; };
 		AC8851022A07FEE1002C2621 /* ChatLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8851012A07FEE1002C2621 /* ChatLogViewModel.swift */; };
+		AC8851052A0813C5002C2621 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8851042A0813C5002C2621 /* ChatMessage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		AC8850FD2A07F49B002C2621 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
 		AC8850FF2A07F906002C2621 /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
 		AC8851012A07FEE1002C2621 /* ChatLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogViewModel.swift; sourceTree = "<group>"; };
+		AC8851042A0813C5002C2621 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +248,7 @@
 		AC8850FA2A07F466002C2621 /* ChatLog */ = {
 			isa = PBXGroup;
 			children = (
+				AC8851032A0813BF002C2621 /* Model */,
 				AC8850FC2A07F493002C2621 /* ViewModel */,
 				AC8850FB2A07F48F002C2621 /* View */,
 			);
@@ -266,6 +269,14 @@
 				AC8851012A07FEE1002C2621 /* ChatLogViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AC8851032A0813BF002C2621 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AC8851042A0813C5002C2621 /* ChatMessage.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,6 +373,7 @@
 				AC8850F72A07BF82002C2621 /* CreateNewMessageViewModel.swift in Sources */,
 				AC8850F52A07BDA5002C2621 /* CreateNewMessageView.swift in Sources */,
 				AC8851002A07F906002C2621 /* ChatMessageView.swift in Sources */,
+				AC8851052A0813C5002C2621 /* ChatMessage.swift in Sources */,
 				AC24845E2A0175FA0073D169 /* User.swift in Sources */,
 				AC2484302A00294C0073D169 /* LoginViewModel.swift in Sources */,
 				AC2484652A0179BC0073D169 /* Optional.swift in Sources */,
