@@ -11,9 +11,14 @@ struct ChatLogView: View {
     
     //MARK: - Properties
     
-    @StateObject private var viewModel = ChatLogViewModel()
+    @ObservedObject private var viewModel: ChatLogViewModel
     
-    let user: User?
+    //MARK: - Init
+    
+    init(user: User?) {
+        self.viewModel = ChatLogViewModel(user: user)
+    }
+    
     
     //MARK: - Body
     
@@ -26,6 +31,9 @@ struct ChatLogView: View {
                 
                 chatBarView
             }
+            .alert(viewModel.errorMessage,
+                   isPresented: $viewModel.isErrorOccurred,
+                   actions: { })
             .navigationTitle("Hello Guys")
             .navigationBarTitleDisplayMode(.inline)
        
@@ -54,11 +62,21 @@ extension ChatLogView {
         HStack(spacing: 16 ) {
             
             Image(systemName: "photo.on.rectangle")
+                .font(.system(size: 24))
+                .foregroundColor(Color(.darkGray))
             
-            //TODO: - TextEditor need to use
-            TextField("Description", text: $viewModel.chatTextMessage)
+            
+            ZStack {
+                descriptionPlaceholder
+                TextEditor(text: $viewModel.chatTextMessage)
+                    .opacity(viewModel.chatTextMessage.isEmpty ? 0.5 : 1)
+            }
+            .frame(height: 40)
+            
             
             Button {
+                
+                viewModel.handleSendAction()
                 
             } label: {
                 Text("Send")
@@ -72,6 +90,18 @@ extension ChatLogView {
         }
         .padding(.horizontal)
         .padding(.vertical, 8)
+    }
+    
+    private var descriptionPlaceholder: some View {
+        HStack {
+            Text("Description")
+                .foregroundColor(Color(.gray))
+                .font(.system(size: 17))
+                .padding(.leading, 5)
+                .padding(.top, -4)
+            
+            Spacer()
+        }
     }
 }
 

@@ -20,7 +20,8 @@ class FirebaseManager {
         return FirebaseManager()
     }()
     
-    private let collectionName: String = "Users"
+    private let userCollectionName: String = "Users"
+    private let messageCollectionName: String = "Messages"
     
     private init() { }
     
@@ -58,7 +59,7 @@ class FirebaseManager {
     
     func storeUserInformation(with userData: [String: Any], completion: @escaping (Error?) -> Void) {
         
-        Firestore.firestore().collection(collectionName).document(getCurrentUserUid()).setData(userData) { error in
+        Firestore.firestore().collection(userCollectionName).document(getCurrentUserUid()).setData(userData) { error in
             completion(error)
         }
     }
@@ -66,16 +67,35 @@ class FirebaseManager {
     
     func fetchCurrentUser(completion: @escaping (DocumentSnapshot?, Error?) -> Void) {
         
-        Firestore.firestore().collection(collectionName).document(getCurrentUserUid()).getDocument { snapshot, error in
+        Firestore.firestore().collection(userCollectionName).document(getCurrentUserUid()).getDocument { snapshot, error in
             completion(snapshot, error)
         }
     }
     
     func fetchAllUsers(completion: @escaping (QuerySnapshot?, Error?) -> Void) {
         
-        Firestore.firestore().collection(collectionName).getDocuments { querySnapShot, error in
+        Firestore.firestore().collection(userCollectionName).getDocuments { querySnapShot, error in
             completion(querySnapShot, error)
         }
+    }
+    
+    func saveMessageIntoStore(with text: String, toId: String, completion: @escaping ((Error?) -> Void))  {
+        
+        let data: [String: Any] = [
+            "fromId": getCurrentUserUid(),
+            "toId": toId,
+            "text": text,
+            "timestamp": Timestamp()
+            ]
+        
+        Firestore.firestore().collection(messageCollectionName).document(getCurrentUserUid()).collection(toId).document().setData(data) { error in
+            completion(error)
+        }
+        
+        Firestore.firestore().collection(messageCollectionName).document(toId).collection(getCurrentUserUid()).document().setData(data) { error in
+            completion(error)
+        }
+        
     }
     
     func handleSignOut() {
