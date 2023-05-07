@@ -12,6 +12,7 @@ struct ChatLogView: View {
     //MARK: - Properties
     
     @ObservedObject private var viewModel: ChatLogViewModel
+    private let scrollToLastMessage: String = "lastMessage"
     
     //MARK: - Init
     
@@ -49,9 +50,20 @@ extension ChatLogView {
         
         ScrollView(showsIndicators: false) {
             
-            ForEach(viewModel.chatMessages) { message in
+            ScrollViewReader { scrollViewProxy in
                 
-                ChatMessageView(chatMessage: message)
+                VStack {
+                    ForEach(viewModel.chatMessages) { message in
+                        
+                        ChatMessageView(chatMessage: message)
+                    }
+                }
+                .id(scrollToLastMessage)
+                .onReceive(viewModel.$addNewMessageByOne) { _ in
+                    withAnimation(.easeOut(duration: 0.5)) {
+                        scrollViewProxy.scrollTo(scrollToLastMessage, anchor: .bottom)
+                    }
+                }
             }
         }
         .background(Color(.init(white: 0.95, alpha: 1.0)))

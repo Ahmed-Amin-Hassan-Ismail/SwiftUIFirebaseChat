@@ -15,6 +15,7 @@ class ChatLogViewModel: ObservableObject {
     
     @Published var chatMessages = [ChatMessage]()
     @Published var chatTextMessage: String = ""
+    @Published var addNewMessageByOne: Int = 0
     @Published var errorMessage: String = ""
     @Published var isErrorOccurred: Bool = false
     
@@ -43,6 +44,7 @@ class ChatLogViewModel: ObservableObject {
                 return
             }
             self.chatTextMessage = ""
+            self.addNewMessageByOne += 1
         }
     }
     
@@ -67,6 +69,8 @@ class ChatLogViewModel: ObservableObject {
                     self.chatMessages.append(.init(documentId: documentId, data: data))
                 }
             })
+            
+            self.addNewMessageByOne += 1
         }
     }
     

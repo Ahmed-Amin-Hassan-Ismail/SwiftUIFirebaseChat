@@ -18,13 +18,19 @@ struct ChatMessageView: View {
         
         HStack {
             
-            Spacer()
+            if isMessageFromCurrentUser() {
+                Spacer()
+            }
             
             Text(chatMessage.text.stringValue)
                 .foregroundColor(isMessageFromCurrentUser() ? .white : .black)
                 .padding()
                 .background(isMessageFromCurrentUser() ? Color.blue : Color.white)
                 .cornerRadius(8)
+            
+            if !isMessageFromCurrentUser() {
+                Spacer()
+            }
         }
         .padding(10)
     }
