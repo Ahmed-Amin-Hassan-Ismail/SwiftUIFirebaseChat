@@ -29,6 +29,8 @@
 		AC8850F72A07BF82002C2621 /* CreateNewMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8850F62A07BF82002C2621 /* CreateNewMessageViewModel.swift */; };
 		AC8850F92A07C6AC002C2621 /* NewUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8850F82A07C6AC002C2621 /* NewUserView.swift */; };
 		AC8850FE2A07F49B002C2621 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8850FD2A07F49B002C2621 /* ChatLogView.swift */; };
+		AC8851002A07F906002C2621 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8850FF2A07F906002C2621 /* ChatMessageView.swift */; };
+		AC8851022A07FEE1002C2621 /* ChatLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8851012A07FEE1002C2621 /* ChatLogViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		AC8850F62A07BF82002C2621 /* CreateNewMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageViewModel.swift; sourceTree = "<group>"; };
 		AC8850F82A07C6AC002C2621 /* NewUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserView.swift; sourceTree = "<group>"; };
 		AC8850FD2A07F49B002C2621 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
+		AC8850FF2A07F906002C2621 /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
+		AC8851012A07FEE1002C2621 /* ChatLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,7 @@
 				AC2484572A0143420073D169 /* UserStatusView.swift */,
 				AC2484512A013EB30073D169 /* MessageView.swift */,
 				AC8850F82A07C6AC002C2621 /* NewUserView.swift */,
+				AC8850FF2A07F906002C2621 /* ChatMessageView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 		AC8850FC2A07F493002C2621 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				AC8851012A07FEE1002C2621 /* ChatLogViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -346,6 +352,7 @@
 				AC24841B2A001CB90073D169 /* SwiftUIFirebasChatApp.swift in Sources */,
 				AC2484562A013ED00073D169 /* MainMessageView.swift in Sources */,
 				AC2484442A0044830073D169 /* ImagePicker.swift in Sources */,
+				AC8851022A07FEE1002C2621 /* ChatLogViewModel.swift in Sources */,
 				AC24843E2A0035510073D169 /* FirebaseManager.swift in Sources */,
 				AC2484612A0176980073D169 /* PreviewProvider.swift in Sources */,
 				AC8850F92A07C6AC002C2621 /* NewUserView.swift in Sources */,
@@ -354,6 +361,7 @@
 				AC2484522A013EB30073D169 /* MessageView.swift in Sources */,
 				AC8850F72A07BF82002C2621 /* CreateNewMessageViewModel.swift in Sources */,
 				AC8850F52A07BDA5002C2621 /* CreateNewMessageView.swift in Sources */,
+				AC8851002A07F906002C2621 /* ChatMessageView.swift in Sources */,
 				AC24845E2A0175FA0073D169 /* User.swift in Sources */,
 				AC2484302A00294C0073D169 /* LoginViewModel.swift in Sources */,
 				AC2484652A0179BC0073D169 /* Optional.swift in Sources */,
