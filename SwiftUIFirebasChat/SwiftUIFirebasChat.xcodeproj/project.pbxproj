@@ -25,6 +25,9 @@
 		AC24845E2A0175FA0073D169 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC24845D2A0175FA0073D169 /* User.swift */; };
 		AC2484612A0176980073D169 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2484602A0176980073D169 /* PreviewProvider.swift */; };
 		AC2484652A0179BC0073D169 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2484642A0179BC0073D169 /* Optional.swift */; };
+		AC8850F52A07BDA5002C2621 /* CreateNewMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8850F42A07BDA5002C2621 /* CreateNewMessageView.swift */; };
+		AC8850F72A07BF82002C2621 /* CreateNewMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8850F62A07BF82002C2621 /* CreateNewMessageViewModel.swift */; };
+		AC8850F92A07C6AC002C2621 /* NewUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8850F82A07C6AC002C2621 /* NewUserView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		AC24845D2A0175FA0073D169 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AC2484602A0176980073D169 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		AC2484642A0179BC0073D169 /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
+		AC8850F42A07BDA5002C2621 /* CreateNewMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageView.swift; sourceTree = "<group>"; };
+		AC8850F62A07BF82002C2621 /* CreateNewMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageViewModel.swift; sourceTree = "<group>"; };
+		AC8850F82A07C6AC002C2621 /* NewUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,7 @@
 		AC2484292A001D930073D169 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				AC8850F12A07BD88002C2621 /* CreateNewMessage */,
 				AC24844C2A013E660073D169 /* MainMessage */,
 				AC24842A2A001D9C0073D169 /* Login */,
 			);
@@ -156,6 +163,7 @@
 				AC2484432A0044830073D169 /* ImagePicker.swift */,
 				AC2484572A0143420073D169 /* UserStatusView.swift */,
 				AC2484512A013EB30073D169 /* MessageView.swift */,
+				AC8850F82A07C6AC002C2621 /* NewUserView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -200,6 +208,31 @@
 				AC24845D2A0175FA0073D169 /* User.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		AC8850F12A07BD88002C2621 /* CreateNewMessage */ = {
+			isa = PBXGroup;
+			children = (
+				AC8850F32A07BD98002C2621 /* ViewModel */,
+				AC8850F22A07BD94002C2621 /* View */,
+			);
+			path = CreateNewMessage;
+			sourceTree = "<group>";
+		};
+		AC8850F22A07BD94002C2621 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AC8850F42A07BDA5002C2621 /* CreateNewMessageView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AC8850F32A07BD98002C2621 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AC8850F62A07BF82002C2621 /* CreateNewMessageViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,8 +321,11 @@
 				AC2484442A0044830073D169 /* ImagePicker.swift in Sources */,
 				AC24843E2A0035510073D169 /* FirebaseManager.swift in Sources */,
 				AC2484612A0176980073D169 /* PreviewProvider.swift in Sources */,
+				AC8850F92A07C6AC002C2621 /* NewUserView.swift in Sources */,
 				AC2484582A0143420073D169 /* UserStatusView.swift in Sources */,
 				AC2484522A013EB30073D169 /* MessageView.swift in Sources */,
+				AC8850F72A07BF82002C2621 /* CreateNewMessageViewModel.swift in Sources */,
+				AC8850F52A07BDA5002C2621 /* CreateNewMessageView.swift in Sources */,
 				AC24845E2A0175FA0073D169 /* User.swift in Sources */,
 				AC2484302A00294C0073D169 /* LoginViewModel.swift in Sources */,
 				AC2484652A0179BC0073D169 /* Optional.swift in Sources */,

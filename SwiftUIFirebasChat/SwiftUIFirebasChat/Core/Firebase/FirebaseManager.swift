@@ -71,6 +71,13 @@ class FirebaseManager {
         }
     }
     
+    func fetchAllUsers(completion: @escaping (QuerySnapshot?, Error?) -> Void) {
+        
+        Firestore.firestore().collection(collectionName).getDocuments { querySnapShot, error in
+            completion(querySnapShot, error)
+        }
+    }
+    
     func handleSignOut() {
         do {
             

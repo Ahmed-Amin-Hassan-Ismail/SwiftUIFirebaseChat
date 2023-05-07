@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct User: Codable {
+struct User: Codable, Identifiable {
     
     var uid: String?
     var firstName: String?
@@ -23,6 +23,10 @@ struct User: Codable {
     }
     var imageUrl: URL? {
         return URL(string: profileImageUrl ?? "")
+    }
+    
+    var id: String {
+        return uid ?? UUID().uuidString
     }
 }
 

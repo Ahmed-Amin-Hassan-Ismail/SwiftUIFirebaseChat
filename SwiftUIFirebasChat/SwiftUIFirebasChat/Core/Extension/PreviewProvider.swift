@@ -31,7 +31,7 @@ class DeveloperPreview {
         firstName: "Ahmed",
         lastName: "Amin",
         email: "ahmed.amin@gmail.com",
-        profileImageUrl: "https://firebasestorage.googleapis.com:443/v0/b/swftuifirebasechat.appspot.com/o/nW3AfPSjEOUxI42n4VL6dwu3GeH3?alt=media&token=cf3ae7a2-aac2-40b5-8391-c65ec0bab4da"
+        profileImageUrl: "https://firebasestorage.googleapis.com:443/v0/b/swftuifirebasechat.appspot.com/o/MveSb24UGpQspff0ZTQtMnE61AT2?alt=media&token=9f83f1c5-0a4d-410f-85ac-cb96bf6bc412"
     )
     
 }

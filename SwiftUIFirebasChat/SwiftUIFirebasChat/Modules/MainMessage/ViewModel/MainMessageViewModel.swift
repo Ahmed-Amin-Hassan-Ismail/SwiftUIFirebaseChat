@@ -12,6 +12,7 @@ class MainMessageViewModel: ObservableObject {
 
     //MARK: - Properties
     
+    @Published var shouldShowNewMessageScreen: Bool = false
     @Published var shouldShowLogoutAlert: Bool = false
     @Published var errorMessage: String = ""
     @Published var isGetAnError: Bool = false

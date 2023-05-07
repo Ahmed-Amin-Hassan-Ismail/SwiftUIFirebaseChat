@@ -29,13 +29,13 @@ struct MainMessageView: View {
                         MessageView()
                     }
                 }
-                .padding(.bottom, 50)
             }
-            .alert(viewModel.errorMessage, isPresented: $viewModel.isGetAnError, actions: {
-                // not implemented yet
-            })
+            .alert(viewModel.errorMessage, isPresented: $viewModel.isGetAnError, actions: { })
             .actionSheet(isPresented: $viewModel.shouldShowLogoutAlert,
                          content: handleActionSheet)
+            .fullScreenCover(isPresented: $viewModel.shouldShowNewMessageScreen) {
+                CreateNewMessageView()
+            }
             .fullScreenCover(isPresented: $viewModel.isUserLoggedOut, content: {
                 LoginView()
             })
@@ -51,6 +51,7 @@ extension MainMessageView {
     
     private var newMessageButton: some View {
         Button {
+            viewModel.shouldShowNewMessageScreen = true
             
         } label: {
             HStack {
