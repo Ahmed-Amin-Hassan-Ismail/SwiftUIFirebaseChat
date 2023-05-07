@@ -14,6 +14,8 @@ struct CreateNewMessageView: View {
     @StateObject private var viewModel = CreateNewMessageViewModel()
     @Environment(\.dismiss) var dismiss
     
+    let didSelectNewUser: ((User) -> Void)?
+    
     //MARK: - Body
     
     var body: some View {
@@ -25,6 +27,10 @@ struct CreateNewMessageView: View {
                     
                     ForEach(viewModel.users ?? []) { user in
                         NewUserView(user: user)
+                            .onTapGesture {
+                                didSelectNewUser?(user)
+                                dismiss()
+                            }
                     }
                 }                
                 .alert(viewModel.errorMessage, isPresented: $viewModel.isErrorOccurred, actions: {})
@@ -61,6 +67,6 @@ extension CreateNewMessageView {
 
 struct CreateNewMessageView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateNewMessageView()
+        CreateNewMessageView(didSelectNewUser: { _ in })
     }
 }

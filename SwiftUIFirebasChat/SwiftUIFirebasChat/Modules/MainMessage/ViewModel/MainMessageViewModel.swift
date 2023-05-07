@@ -14,10 +14,12 @@ class MainMessageViewModel: ObservableObject {
     
     @Published var shouldShowNewMessageScreen: Bool = false
     @Published var shouldShowLogoutAlert: Bool = false
+    @Published var shouldNavigateToChatLogView: Bool = false
+    @Published var isUserLoggedOut: Bool = false
     @Published var errorMessage: String = ""
     @Published var isGetAnError: Bool = false
-    @Published var isUserLoggedOut: Bool = false
     @Published var user: User?
+    @Published var selectedUser: User?
     
     //MARK: - Init
     

@@ -27,19 +27,24 @@ struct MainMessageView: View {
                 ScrollView(showsIndicators: false) {
                     ForEach(0..<10, id: \.self) { _ in
                         MessageView()
+                            .onTapGesture {
+                                viewModel.shouldNavigateToChatLogView = true
+                                //navigateToChatLogView(with: <#T##User?#>)
+                            }
                     }
                 }
             }
-            .alert(viewModel.errorMessage, isPresented: $viewModel.isGetAnError, actions: { })
+            .overlay(newMessageButton, alignment: .bottom)
+            .background( navigateToChatLogView(with: viewModel.selectedUser) )
+            .alert(viewModel.errorMessage,
+                   isPresented: $viewModel.isGetAnError,
+                   actions: { /* not implemented yet */ })
             .actionSheet(isPresented: $viewModel.shouldShowLogoutAlert,
                          content: handleActionSheet)
-            .fullScreenCover(isPresented: $viewModel.shouldShowNewMessageScreen) {
-                CreateNewMessageView()
-            }
-            .fullScreenCover(isPresented: $viewModel.isUserLoggedOut, content: {
-                LoginView()
-            })
-            .overlay(newMessageButton, alignment: .bottom)
+            .fullScreenCover(isPresented: $viewModel.shouldShowNewMessageScreen,
+                             content: { showNewMessageView })
+            .fullScreenCover(isPresented: $viewModel.isUserLoggedOut,
+                             content: { LoginView() })
             .navigationBarHidden(true)
         }
     }
@@ -83,6 +88,22 @@ extension MainMessageView {
             },
             .cancel()
         ])
+    }
+    
+    private func navigateToChatLogView(with user: User?) -> some View {
+        NavigationLink(
+            destination: ChatLogView(user: user),
+            isActive: $viewModel.shouldNavigateToChatLogView,
+            label: { EmptyView() }
+        )
+
+    }
+    
+    private var showNewMessageView: some View {
+        CreateNewMessageView { user in
+            viewModel.shouldNavigateToChatLogView = true
+            viewModel.selectedUser = user
+        }
     }
 }
 
