@@ -35,10 +35,11 @@ class DeveloperPreview {
     )
     
     let chatMessage = ChatMessage(
-        fromId: "123123",
-        toId: "456456",
-        text: "Message for testing",
-        timestamp: "",
-        documentId: "asdfasdf")
-    
+        fromId: "MveSb24UGpQspff0ZTQtMnE61AT2",
+        toId: "4enuYNHPUAXcgKBlAQVFaIoqK0c2",
+        text: "Hi Ahmed this is from ahmed@gmail.com",
+        timestamp: "<FIRTimestamp: seconds=1683558726 nanoseconds=588440000>",
+        fullName: "Ahmed Amin",
+        email: "ahmed2@gmail.com",
+        profileImageUrl: "https://firebasestorage.googleapis.com:443/v0/b/swftuifirebasechat.appspot.com/o/4enuYNHPUAXcgKBlAQVFaIoqK0c2?alt=media&token=cb28af83-6316-4548-aa65-86038fb8bf05")
 }

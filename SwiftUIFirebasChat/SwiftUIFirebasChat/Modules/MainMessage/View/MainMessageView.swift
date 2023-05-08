@@ -25,8 +25,8 @@ struct MainMessageView: View {
                                shouldShowLogoutAlert: $viewModel.shouldShowLogoutAlert)
                 
                 ScrollView(showsIndicators: false) {
-                    ForEach(0..<10, id: \.self) { _ in
-                        MessageView()
+                    ForEach(viewModel.recentMessages) { message in
+                        MessageView(message: message)
                             .onTapGesture {
                                 viewModel.shouldNavigateToChatLogView = true
                                 //navigateToChatLogView(with: <#T##User?#>)
@@ -83,11 +83,11 @@ extension MainMessageView {
             title: Text("Settings".uppercased()),
             message: Text("What do you want to do?"),
             buttons: [
-            .destructive(Text("Sign out")) {
-                viewModel.signOut()
-            },
-            .cancel()
-        ])
+                .destructive(Text("Sign out")) {
+                    viewModel.signOut()
+                },
+                .cancel()
+            ])
     }
     
     private func navigateToChatLogView(with user: User?) -> some View {
@@ -96,7 +96,7 @@ extension MainMessageView {
             isActive: $viewModel.shouldNavigateToChatLogView,
             label: { EmptyView() }
         )
-
+        
     }
     
     private var showNewMessageView: some View {

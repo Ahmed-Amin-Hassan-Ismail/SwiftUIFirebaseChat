@@ -9,7 +9,7 @@ import Foundation
 
 
 class MainMessageViewModel: ObservableObject {
-
+    
     //MARK: - Properties
     
     @Published var shouldShowNewMessageScreen: Bool = false
@@ -20,6 +20,7 @@ class MainMessageViewModel: ObservableObject {
     @Published var isGetAnError: Bool = false
     @Published var user: User?
     @Published var selectedUser: User?
+    @Published var recentMessages = [ChatMessage]()
     
     //MARK: - Init
     
@@ -50,8 +51,41 @@ class MainMessageViewModel: ObservableObject {
             }
             
             guard let data = snapshot?.data() else { return }
-                                    
+            
             self.user = User(data: data)
+            self.fetchRecentMessages()
+        }
+    }
+    
+    private func fetchRecentMessages() {
+        
+        guard let user = user else { return }
+        
+        let chatMessage = ChatMessage(
+            fromId: FirebaseManager.shared.getCurrentUserUid(),
+            toId: user.uid,
+            email: user.email,
+            profileImageUrl: user.profileImageUrl
+        )
+        
+        FirebaseManager.shared.fetchRecentMessages(with: chatMessage) { [weak self] querySnapshot, error in
+            guard let self = self else { return }
+            guard error == nil else {
+                self.errorMessage = error!.localizedDescription
+                self.isGetAnError = true
+                return
+            }
+            
+            querySnapshot?.documentChanges.forEach({ documentChange in
+                let documentId = documentChange.document.documentID
+                let data = documentChange.document.data()
+                
+                if let index = self.recentMessages.firstIndex(where: { $0.documentId == documentId }) {
+                    self.recentMessages.remove(at: index)
+                }
+                
+                self.recentMessages.insert(.init(documentId: documentId, data: data), at: 0)
+            })
         }
     }
     

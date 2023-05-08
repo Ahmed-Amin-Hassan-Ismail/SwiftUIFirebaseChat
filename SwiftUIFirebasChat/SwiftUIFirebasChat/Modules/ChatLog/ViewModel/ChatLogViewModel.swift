@@ -40,10 +40,11 @@ class ChatLogViewModel: ObservableObject {
             fromId: FirebaseManager.shared.getCurrentUserUid(),
             toId: user.uid,
             text: chatTextMessage,
+            fullName: user.fullName,
             email: user.email,
             profileImageUrl: user.profileImageUrl
         )
-
+        
         FirebaseManager.shared.saveMessageIntoStore(with: chatMessage){ [weak self] error in
             guard let self = self else { return }
             guard error == nil else {
@@ -67,6 +68,7 @@ class ChatLogViewModel: ObservableObject {
             fromId: FirebaseManager.shared.getCurrentUserUid(),
             toId: user.uid,
             text: chatTextMessage,
+            fullName: user.fullName,
             email: user.email,
             profileImageUrl: user.profileImageUrl
         )
@@ -99,6 +101,7 @@ class ChatLogViewModel: ObservableObject {
             fromId: FirebaseManager.shared.getCurrentUserUid(),
             toId: user.uid,
             text: chatTextMessage,
+            fullName: user.fullName,
             email: user.email,
             profileImageUrl: user.profileImageUrl
         )

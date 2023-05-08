@@ -16,6 +16,7 @@ struct ChatMessage: Codable, Identifiable {
     var text: String?
     var timestamp: String?
     var documentId: String?
+    var fullName: String?
     var email: String?
     var profileImageUrl: String?
     
@@ -23,6 +24,9 @@ struct ChatMessage: Codable, Identifiable {
         return documentId ?? ""
     }
     
+    var imageUrl: URL? {
+        return URL(string: profileImageUrl ?? "")
+    }
 }
 
 extension ChatMessage {
@@ -33,6 +37,7 @@ extension ChatMessage {
         self.toId = data["toId"] as? String
         self.text = data["text"] as? String
         self.timestamp = data["timestamp"] as? String
+        self.fullName = data["fullName"] as? String
         self.email = data["email"] as? String
         self.profileImageUrl = data["profileImageUrl"] as? String
     }

@@ -88,8 +88,9 @@ class FirebaseManager {
             "text": chatMessage.text ?? "",
             "timestamp": Timestamp(),
             "profileImageUrl": chatMessage.profileImageUrl ?? "",
-            "email": chatMessage.email ?? ""
-            ]
+            "email": chatMessage.email ?? "",
+            "fullName": chatMessage.fullName ?? ""
+        ]
         
         Firestore.firestore().collection(messageCollectionName).document(chatMessage.fromId ?? "").collection(chatMessage.toId ?? "").document().setData(data) { error in
             completion(error)
@@ -101,10 +102,10 @@ class FirebaseManager {
         
     }
     
-    func fetchAllMessages(with chatMessage: ChatMessage, completiobn: @escaping (QuerySnapshot?, Error?) -> Void) {
+    func fetchAllMessages(with chatMessage: ChatMessage, completion: @escaping (QuerySnapshot?, Error?) -> Void) {
         
         Firestore.firestore().collection(messageCollectionName).document(chatMessage.fromId ?? "").collection(chatMessage.toId ?? "").order(by: "timestamp").addSnapshotListener { querySnapshot, error in
-            completiobn(querySnapshot, error)
+            completion(querySnapshot, error)
         }
     }
     
@@ -116,11 +117,23 @@ class FirebaseManager {
             "text": chatMessage.text ?? "",
             "timestamp": Timestamp(),
             "profileImageUrl": chatMessage.profileImageUrl ?? "",
-            "email": chatMessage.email ?? ""
-            ]
+            "email": chatMessage.email ?? "",
+            "fullName": chatMessage.fullName ?? ""
+        ]
         
         Firestore.firestore().collection(recentMessageName).document(chatMessage.fromId ?? "").collection(messageCollectionName).document(chatMessage.toId ?? "").setData(data) { error in
             completion(error)
+        }
+        
+        Firestore.firestore().collection(recentMessageName).document(chatMessage.toId ?? "").collection(messageCollectionName).document(chatMessage.fromId ?? "").setData(data) { error in
+            completion(error)
+        }
+    }
+    
+    func fetchRecentMessages(with chatMessage: ChatMessage, completion: @escaping (QuerySnapshot?, Error?) -> Void) {
+        
+        Firestore.firestore().collection(recentMessageName).document(chatMessage.fromId ?? "").collection(messageCollectionName).order(by: "timestamp").addSnapshotListener { querySnapshot, error in
+            completion(querySnapshot, error)
         }
     }
     
