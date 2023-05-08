@@ -34,15 +34,24 @@ class ChatLogViewModel: ObservableObject {
     
     func handleSendAction() {
         
-        guard let toId = user?.uid else { return }
+        guard let user = user else { return }
         
-        FirebaseManager.shared.saveMessageIntoStore(with: chatTextMessage, toId: toId) { [weak self] error in
+        let chatMessage = ChatMessage(
+            fromId: FirebaseManager.shared.getCurrentUserUid(),
+            toId: user.uid,
+            text: chatTextMessage,
+            email: user.email,
+            profileImageUrl: user.profileImageUrl
+        )
+
+        FirebaseManager.shared.saveMessageIntoStore(with: chatMessage){ [weak self] error in
             guard let self = self else { return }
             guard error == nil else {
                 self.errorMessage = error?.localizedDescription ?? ""
                 self.isErrorOccurred = true
                 return
             }
+            self.persistRecentMessage()
             self.chatTextMessage = ""
             self.addNewMessageByOne += 1
         }
@@ -52,9 +61,17 @@ class ChatLogViewModel: ObservableObject {
     
     private func fetchAllMessages() {
         
-        guard let toId = user?.uid else { return }
+        guard let user = user else { return }
         
-        FirebaseManager.shared.fetchAllMessages(toId: toId) { [weak self] querySnapshot, error in
+        let chatMessage = ChatMessage(
+            fromId: FirebaseManager.shared.getCurrentUserUid(),
+            toId: user.uid,
+            text: chatTextMessage,
+            email: user.email,
+            profileImageUrl: user.profileImageUrl
+        )
+        
+        FirebaseManager.shared.fetchAllMessages(with: chatMessage) { [weak self] querySnapshot, error in
             guard let self = self else { return }
             guard error == nil else {
                 self.errorMessage = error?.localizedDescription ?? ""
@@ -74,4 +91,27 @@ class ChatLogViewModel: ObservableObject {
         }
     }
     
+    private func persistRecentMessage() {
+        
+        guard let user = user else { return }
+        
+        let chatMessage = ChatMessage(
+            fromId: FirebaseManager.shared.getCurrentUserUid(),
+            toId: user.uid,
+            text: chatTextMessage,
+            email: user.email,
+            profileImageUrl: user.profileImageUrl
+        )
+        
+        FirebaseManager.shared.persistLastMessage(with: chatMessage) { [weak self] error in
+            guard let self = self else { return }
+            guard error == nil else {
+                self.errorMessage = error!.localizedDescription
+                self.isErrorOccurred = true
+                return
+            }
+        }
+        
+        //TODO: - You need to add the similar for recipient users as well ...
+    }
 }

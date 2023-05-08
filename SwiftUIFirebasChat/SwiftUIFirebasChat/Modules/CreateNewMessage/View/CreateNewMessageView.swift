@@ -25,7 +25,7 @@ struct CreateNewMessageView: View {
                 
                 LazyVStack {
                     
-                    ForEach(viewModel.users ?? []) { user in
+                    ForEach(viewModel.users) { user in
                         NewUserView(user: user)
                             .onTapGesture {
                                 didSelectNewUser?(user)

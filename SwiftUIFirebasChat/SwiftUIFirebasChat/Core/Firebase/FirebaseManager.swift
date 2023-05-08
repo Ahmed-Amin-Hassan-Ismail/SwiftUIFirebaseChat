@@ -22,6 +22,7 @@ class FirebaseManager {
     
     private let userCollectionName: String = "Users"
     private let messageCollectionName: String = "Messages"
+    private let recentMessageName: String = "Recent_Messages"
     
     private init() { }
     
@@ -79,29 +80,47 @@ class FirebaseManager {
         }
     }
     
-    func saveMessageIntoStore(with text: String, toId: String, completion: @escaping ((Error?) -> Void))  {
+    func saveMessageIntoStore(with chatMessage: ChatMessage, completion: @escaping ((Error?) -> Void))  {
         
         let data: [String: Any] = [
-            "fromId": getCurrentUserUid(),
-            "toId": toId,
-            "text": text,
-            "timestamp": Timestamp()
+            "fromId": chatMessage.fromId ?? "",
+            "toId": chatMessage.toId ?? "",
+            "text": chatMessage.text ?? "",
+            "timestamp": Timestamp(),
+            "profileImageUrl": chatMessage.profileImageUrl ?? "",
+            "email": chatMessage.email ?? ""
             ]
         
-        Firestore.firestore().collection(messageCollectionName).document(getCurrentUserUid()).collection(toId).document().setData(data) { error in
+        Firestore.firestore().collection(messageCollectionName).document(chatMessage.fromId ?? "").collection(chatMessage.toId ?? "").document().setData(data) { error in
             completion(error)
         }
         
-        Firestore.firestore().collection(messageCollectionName).document(toId).collection(getCurrentUserUid()).document().setData(data) { error in
+        Firestore.firestore().collection(messageCollectionName).document(chatMessage.toId ?? "").collection(chatMessage.fromId ?? "").document().setData(data) { error in
             completion(error)
         }
         
     }
     
-    func fetchAllMessages(toId: String, completiobn: @escaping (QuerySnapshot?, Error?) -> Void) {
+    func fetchAllMessages(with chatMessage: ChatMessage, completiobn: @escaping (QuerySnapshot?, Error?) -> Void) {
         
-        Firestore.firestore().collection(messageCollectionName).document(getCurrentUserUid()).collection(toId).order(by: "timestamp").addSnapshotListener { querySnapshot, error in
+        Firestore.firestore().collection(messageCollectionName).document(chatMessage.fromId ?? "").collection(chatMessage.toId ?? "").order(by: "timestamp").addSnapshotListener { querySnapshot, error in
             completiobn(querySnapshot, error)
+        }
+    }
+    
+    func persistLastMessage(with chatMessage: ChatMessage, completion: @escaping (Error?) -> Void) {
+        
+        let data: [String: Any] = [
+            "fromId": chatMessage.fromId ?? "",
+            "toId": chatMessage.toId ?? "",
+            "text": chatMessage.text ?? "",
+            "timestamp": Timestamp(),
+            "profileImageUrl": chatMessage.profileImageUrl ?? "",
+            "email": chatMessage.email ?? ""
+            ]
+        
+        Firestore.firestore().collection(recentMessageName).document(chatMessage.fromId ?? "").collection(messageCollectionName).document(chatMessage.toId ?? "").setData(data) { error in
+            completion(error)
         }
     }
     
