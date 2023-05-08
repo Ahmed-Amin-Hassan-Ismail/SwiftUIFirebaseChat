@@ -32,6 +32,10 @@
 		AC8851002A07F906002C2621 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8850FF2A07F906002C2621 /* ChatMessageView.swift */; };
 		AC8851022A07FEE1002C2621 /* ChatLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8851012A07FEE1002C2621 /* ChatLogViewModel.swift */; };
 		AC8851052A0813C5002C2621 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8851042A0813C5002C2621 /* ChatMessage.swift */; };
+		ACAFB2E22A0951390043B3A7 /* emptyMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = ACAFB2E12A0951390043B3A7 /* emptyMessage.json */; };
+		ACAFB2E72A0951710043B3A7 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAFB2E62A0951710043B3A7 /* LottieView.swift */; };
+		ACAFB2EE2A09587F0043B3A7 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = ACAFB2ED2A09587F0043B3A7 /* Lottie */; };
+		ACAFB2F22A095C6B0043B3A7 /* noMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = ACAFB2F12A095C6B0043B3A7 /* noMessage.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +62,9 @@
 		AC8850FF2A07F906002C2621 /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
 		AC8851012A07FEE1002C2621 /* ChatLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogViewModel.swift; sourceTree = "<group>"; };
 		AC8851042A0813C5002C2621 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		ACAFB2E12A0951390043B3A7 /* emptyMessage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptyMessage.json; sourceTree = "<group>"; };
+		ACAFB2E62A0951710043B3A7 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		ACAFB2F12A095C6B0043B3A7 /* noMessage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = noMessage.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +75,7 @@
 				AC2484472A0054220073D169 /* FirebaseAuth in Frameworks */,
 				AC2484492A0054220073D169 /* FirebaseFirestore in Frameworks */,
 				AC24844B2A0054220073D169 /* FirebaseStorage in Frameworks */,
+				ACAFB2EE2A09587F0043B3A7 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,10 +102,13 @@
 			isa = PBXGroup;
 			children = (
 				AC24841A2A001CB90073D169 /* SwiftUIFirebasChatApp.swift */,
+				ACAFB2E52A0951630043B3A7 /* Utils */,
 				AC24843B2A0035420073D169 /* Core */,
 				AC2484422A0044780073D169 /* Component */,
 				AC2484292A001D930073D169 /* Modules */,
 				AC24841E2A001CBA0073D169 /* Assets.xcassets */,
+				ACAFB2E12A0951390043B3A7 /* emptyMessage.json */,
+				ACAFB2F12A095C6B0043B3A7 /* noMessage.json */,
 				AC2484392A0035290073D169 /* GoogleService-Info.plist */,
 				AC2484202A001CBA0073D169 /* Preview Content */,
 			);
@@ -279,6 +290,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		ACAFB2E52A0951630043B3A7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				ACAFB2E62A0951710043B3A7 /* LottieView.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -299,6 +318,7 @@
 				AC2484462A0054220073D169 /* FirebaseAuth */,
 				AC2484482A0054220073D169 /* FirebaseFirestore */,
 				AC24844A2A0054220073D169 /* FirebaseStorage */,
+				ACAFB2ED2A09587F0043B3A7 /* Lottie */,
 			);
 			productName = SwiftUIFirebasChat;
 			productReference = AC2484172A001CB90073D169 /* SwiftUIFirebasChat.app */;
@@ -330,6 +350,7 @@
 			mainGroup = AC24840E2A001CB90073D169;
 			packageReferences = (
 				AC2484452A0054220073D169 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				ACAFB2EC2A09587F0043B3A7 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = AC2484182A001CB90073D169 /* Products */;
 			projectDirPath = "";
@@ -346,6 +367,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC2484222A001CBA0073D169 /* Preview Assets.xcassets in Resources */,
+				ACAFB2E22A0951390043B3A7 /* emptyMessage.json in Resources */,
+				ACAFB2F22A095C6B0043B3A7 /* noMessage.json in Resources */,
 				AC24841F2A001CBA0073D169 /* Assets.xcassets in Resources */,
 				AC24843A2A0035290073D169 /* GoogleService-Info.plist in Resources */,
 			);
@@ -368,6 +391,7 @@
 				AC2484612A0176980073D169 /* PreviewProvider.swift in Sources */,
 				AC8850F92A07C6AC002C2621 /* NewUserView.swift in Sources */,
 				AC2484582A0143420073D169 /* UserStatusView.swift in Sources */,
+				ACAFB2E72A0951710043B3A7 /* LottieView.swift in Sources */,
 				AC8850FE2A07F49B002C2621 /* ChatLogView.swift in Sources */,
 				AC2484522A013EB30073D169 /* MessageView.swift in Sources */,
 				AC8850F72A07BF82002C2621 /* CreateNewMessageViewModel.swift in Sources */,
@@ -593,6 +617,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		ACAFB2EC2A09587F0043B3A7 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -610,6 +642,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AC2484452A0054220073D169 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		ACAFB2ED2A09587F0043B3A7 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACAFB2EC2A09587F0043B3A7 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

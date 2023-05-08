@@ -24,13 +24,22 @@ struct MainMessageView: View {
                 UserStatusView(user: viewModel.user,
                                shouldShowLogoutAlert: $viewModel.shouldShowLogoutAlert)
                 
-                ScrollView(showsIndicators: false) {
-                    ForEach(viewModel.recentMessages) { message in
-                        MessageView(message: message)
-                            .onTapGesture {
-                                viewModel.shouldNavigateToChatLogView = true
-                                //navigateToChatLogView(with: <#T##User?#>)
+                ZStack {
+                    if viewModel.recentMessages.isEmpty {
+                        
+                        LottieView(lottieFile: "noMessage")
+                            .offset(y: -60)
+                        
+                    } else {
+                        
+                        ScrollView(showsIndicators: false) {
+                            ForEach(viewModel.recentMessages) { message in
+                                MessageView(message: message)
+                                    .onTapGesture {
+                                        navigateToUserChat(with: message)
+                                    }
                             }
+                        }
                     }
                 }
             }
@@ -97,6 +106,11 @@ extension MainMessageView {
             label: { EmptyView() }
         )
         
+    }
+    
+    private func navigateToUserChat(with message: ChatMessage) {
+        viewModel.shouldNavigateToChatLogView = true
+        viewModel.selectedUser = User(uid: message.toId, email: message.email, profileImageUrl: message.profileImageUrl)
     }
     
     private var showNewMessageView: some View {

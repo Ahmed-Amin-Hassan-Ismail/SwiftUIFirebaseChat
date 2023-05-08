@@ -48,20 +48,28 @@ extension ChatLogView {
     
     private var userMessages: some View {
         
-        ScrollView(showsIndicators: false) {
-            
-            ScrollViewReader { scrollViewProxy in
+        ZStack {
+            if viewModel.chatMessages.isEmpty {
                 
-                VStack {
-                    ForEach(viewModel.chatMessages) { message in
+                LottieView(lottieFile: "emptyMessage")
+                
+            } else {
+                ScrollView(showsIndicators: false) {
+                    
+                    ScrollViewReader { scrollViewProxy in
                         
-                        ChatMessageView(chatMessage: message)
-                    }
-                }
-                .id(scrollToLastMessage)
-                .onReceive(viewModel.$addNewMessageByOne) { _ in
-                    withAnimation(.easeOut(duration: 0.5)) {
-                        scrollViewProxy.scrollTo(scrollToLastMessage, anchor: .bottom)
+                        VStack {
+                            ForEach(viewModel.chatMessages) { message in
+                                
+                                ChatMessageView(chatMessage: message)
+                            }
+                        }
+                        .id(scrollToLastMessage)
+                        .onReceive(viewModel.$addNewMessageByOne) { _ in
+                            withAnimation(.easeOut(duration: 0.5)) {
+                                scrollViewProxy.scrollTo(scrollToLastMessage, anchor: .bottom)
+                            }
+                        }
                     }
                 }
             }
