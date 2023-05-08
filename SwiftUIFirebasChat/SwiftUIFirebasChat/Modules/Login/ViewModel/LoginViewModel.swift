@@ -59,7 +59,6 @@ extension LoginViewModel {
             }
             
             self.persistImageToStorage(with: user)
-            self.shouldShowLoadingView = false
         }
     }
     

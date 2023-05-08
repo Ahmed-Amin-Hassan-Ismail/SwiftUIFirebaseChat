@@ -28,7 +28,6 @@ struct MainMessageView: View {
                     if viewModel.recentMessages.isEmpty {
                         
                         LottieView(lottieFile: "noMessage")
-                            .offset(y: -60)
                         
                     } else {
                         
