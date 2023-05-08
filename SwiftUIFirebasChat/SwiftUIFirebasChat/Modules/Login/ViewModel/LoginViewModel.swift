@@ -17,6 +17,7 @@ class LoginViewModel: ObservableObject {
     @Published var isErrorOccured: Bool = false
     @Published var errorMessage: String = ""
     @Published var isUserLoginSuccessfully: Bool = false
+    @Published var shouldShowLoadingView: Bool = false
     
     
     //MARK: - Methods
@@ -45,27 +46,35 @@ extension LoginViewModel {
             return
         }
         
+        shouldShowLoadingView = true
+        
         FirebaseManager.shared.createNewUser(with: user.email.stringValue,
                                              password: user.password.stringValue) { [weak self] result, error in
             guard let self = self else { return }
             guard error == nil else {
                 self.isErrorOccured = true
                 self.errorMessage = error?.localizedDescription ?? ""
+                self.shouldShowLoadingView = false
                 return
             }
             
             self.persistImageToStorage(with: user)
+            self.shouldShowLoadingView = false
         }
     }
     
     private func persistImageToStorage(with user: User) {
         
         guard let imageData = user.profileImageData else { return }
+        
+        shouldShowLoadingView = true
+        
         FirebaseManager.shared.pushImageIntoStorage(imageData: imageData) { [weak self] url, error in
             guard let self = self else { return }
             guard error == nil else {
                 self.isErrorOccured = true
                 self.errorMessage = error?.localizedDescription ?? ""
+                self.shouldShowLoadingView = false
                 return
             }
             
@@ -89,10 +98,12 @@ extension LoginViewModel {
             guard error == nil else {
                 self.isErrorOccured = true
                 self.errorMessage = error?.localizedDescription ?? ""
+                self.shouldShowLoadingView = false
                 return
             }
             
             self.isUserLoginSuccessfully = true
+            self.shouldShowLoadingView = false
         }
     }
 }
@@ -109,16 +120,20 @@ extension LoginViewModel {
             return
         }
         
+        shouldShowLoadingView = true
+        
         FirebaseManager.shared.loginUser(with: user.email.stringValue,
                                          password: user.password.stringValue) { [weak self] result, error in
             guard let self = self else { return }
             guard error == nil else {
                 self.isErrorOccured = true
                 self.errorMessage = error?.localizedDescription ?? ""
+                self.shouldShowLoadingView = false
                 return
             }
             
             self.isUserLoginSuccessfully = true
+            self.shouldShowLoadingView = false
         }
     }
 }

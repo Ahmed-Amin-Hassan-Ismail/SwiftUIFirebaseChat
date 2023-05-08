@@ -36,6 +36,8 @@
 		ACAFB2E72A0951710043B3A7 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAFB2E62A0951710043B3A7 /* LottieView.swift */; };
 		ACAFB2EE2A09587F0043B3A7 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = ACAFB2ED2A09587F0043B3A7 /* Lottie */; };
 		ACAFB2F22A095C6B0043B3A7 /* noMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = ACAFB2F12A095C6B0043B3A7 /* noMessage.json */; };
+		ACAFB2F42A095F6D0043B3A7 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = ACAFB2F32A095F6D0043B3A7 /* loading.json */; };
+		ACAFB2F62A0960A60043B3A7 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAFB2F52A0960A60043B3A7 /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +67,8 @@
 		ACAFB2E12A0951390043B3A7 /* emptyMessage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptyMessage.json; sourceTree = "<group>"; };
 		ACAFB2E62A0951710043B3A7 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		ACAFB2F12A095C6B0043B3A7 /* noMessage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = noMessage.json; sourceTree = "<group>"; };
+		ACAFB2F32A095F6D0043B3A7 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		ACAFB2F52A0960A60043B3A7 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,7 @@
 				AC24841E2A001CBA0073D169 /* Assets.xcassets */,
 				ACAFB2E12A0951390043B3A7 /* emptyMessage.json */,
 				ACAFB2F12A095C6B0043B3A7 /* noMessage.json */,
+				ACAFB2F32A095F6D0043B3A7 /* loading.json */,
 				AC2484392A0035290073D169 /* GoogleService-Info.plist */,
 				AC2484202A001CBA0073D169 /* Preview Content */,
 			);
@@ -294,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				ACAFB2E62A0951710043B3A7 /* LottieView.swift */,
+				ACAFB2F52A0960A60043B3A7 /* LoadingView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -368,6 +374,7 @@
 			files = (
 				AC2484222A001CBA0073D169 /* Preview Assets.xcassets in Resources */,
 				ACAFB2E22A0951390043B3A7 /* emptyMessage.json in Resources */,
+				ACAFB2F42A095F6D0043B3A7 /* loading.json in Resources */,
 				ACAFB2F22A095C6B0043B3A7 /* noMessage.json in Resources */,
 				AC24841F2A001CBA0073D169 /* Assets.xcassets in Resources */,
 				AC24843A2A0035290073D169 /* GoogleService-Info.plist in Resources */,
@@ -386,6 +393,7 @@
 				AC24841B2A001CB90073D169 /* SwiftUIFirebasChatApp.swift in Sources */,
 				AC2484562A013ED00073D169 /* MainMessageView.swift in Sources */,
 				AC2484442A0044830073D169 /* ImagePicker.swift in Sources */,
+				ACAFB2F62A0960A60043B3A7 /* LoadingView.swift in Sources */,
 				AC8851022A07FEE1002C2621 /* ChatLogViewModel.swift in Sources */,
 				AC24843E2A0035510073D169 /* FirebaseManager.swift in Sources */,
 				AC2484612A0176980073D169 /* PreviewProvider.swift in Sources */,

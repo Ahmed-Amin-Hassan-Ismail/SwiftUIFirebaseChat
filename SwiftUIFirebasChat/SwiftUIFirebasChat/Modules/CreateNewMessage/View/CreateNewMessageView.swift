@@ -35,6 +35,9 @@ struct CreateNewMessageView: View {
                 }                
                 .alert(viewModel.errorMessage, isPresented: $viewModel.isErrorOccurred, actions: {})
             }
+            .overlay(
+                LoadingView(showing: $viewModel.shouldShowLoadingView)
+            )
             .navigationTitle("New Message")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading, content: {

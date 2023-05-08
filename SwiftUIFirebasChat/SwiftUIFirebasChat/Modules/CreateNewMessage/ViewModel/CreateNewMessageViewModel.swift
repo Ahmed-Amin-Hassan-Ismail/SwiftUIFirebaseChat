@@ -16,6 +16,7 @@ class CreateNewMessageViewModel: ObservableObject {
     @Published var users = [User]()
     @Published var errorMessage: String = ""
     @Published var isErrorOccurred: Bool = false
+    @Published var shouldShowLoadingView: Bool = false
     
     //MARK: - Init
     
@@ -28,11 +29,14 @@ class CreateNewMessageViewModel: ObservableObject {
     
     private func fetchAllUsers() {
         
+        shouldShowLoadingView = true
+        
         FirebaseManager.shared.fetchAllUsers { [weak self] querySnapshot, error in
             guard let self = self else { return }
             guard error == nil else {
                 self.errorMessage = error?.localizedDescription ?? ""
                 self.isErrorOccurred = true
+                self.shouldShowLoadingView = false
                 return
             }
             
@@ -42,7 +46,7 @@ class CreateNewMessageViewModel: ObservableObject {
                 if user.uid != FirebaseManager.shared.getCurrentUserUid() {
                     self.users.append(.init(data: data))
                 }
-                
+                self.shouldShowLoadingView = false
             })
         }
     }

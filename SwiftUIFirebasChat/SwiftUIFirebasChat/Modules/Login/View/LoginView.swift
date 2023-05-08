@@ -19,6 +19,7 @@ struct LoginView: View {
     @State private var password: String = ""
     
     
+    
     //MARK: - Body
     
     var body: some View {
@@ -47,6 +48,9 @@ struct LoginView: View {
             }
             .navigationTitle(viewModel.isLoginMode ? "Log in" : "Create Account")
             .navigationViewStyle(.stack)
+            .overlay(
+                LoadingView(showing: $viewModel.shouldShowLoadingView)
+            )
             .background(
                 ZStack {
                     Color.init(UIColor(white: 0, alpha: 0.05))
