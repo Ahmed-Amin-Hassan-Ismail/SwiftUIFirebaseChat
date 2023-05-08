@@ -45,7 +45,6 @@ struct NewUserView: View {
                 Spacer()
             }
             .padding()
-            //.padding(.vertical, 10)
             Divider()
         }
     }
