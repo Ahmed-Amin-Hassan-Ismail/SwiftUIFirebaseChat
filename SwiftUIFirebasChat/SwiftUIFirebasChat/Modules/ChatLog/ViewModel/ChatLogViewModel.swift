@@ -114,7 +114,5 @@ class ChatLogViewModel: ObservableObject {
                 return
             }
         }
-        
-        //TODO: - You need to add the similar for recipient users as well ...
     }
 }
